@@ -1,53 +1,62 @@
-from random import randint 
+import random
+def get_choide(choice):
+    if choice == "R" :
+        return "Rock"
+    elif choice == "P" :
+        return "Paper"
+    elif choice== "S" :
+        return "Scissors"
+    else :
+        return "Not a Valid Choice"
 
-print("Please , Fill Your Name Below ")
-playername = input()
-print('Hello ,',playername,'welcome to ROCK , PAPER & SCISSORS GAME. Have fun !')
+def main() :
 
-print("Please choose : 0-rock | 1-paper | 2-scissors ")
+    name=input(f'Please enter yourname : ')
+    name = name.upper()
+    print('Welcome',name,'to Rock , Paper & Scissors Game . Have Fun !')
+    print("[R]=Rock , [P]=Paper , [S]=Scissors $ [Q]=Quit Game")
 
-player = input()
-playerx = int(player)
-if playerx >= 3 :
-    print("Wrong Choice")
-if playerx == 0 : 
-    player = "rock"
-if playerx == 1 : 
-    player = "paper"
-if playerx == 2 :
-    player = "scissors"
-print('your choice : ',player)
+    choices = ["R","P","C"]
+    counter = 1
+    game_on = True
 
-computer = randint(0,2)
-if computer == 0 : 
-    computer = "rock"
-if computer == 1 : 
-    computer = "paper"
-if computer == 2 :
-    computer = "scissors"
+    while game_on:
+        # co f dung de ep kiêu string de edit no nhu kieu du lieu
+        user_choice = input(f"Game #{counter}.Please enter your choice:")
+        user_choice = user_choice.upper()
+        if user_choice == "Q" :
+            print('Thanks for joining ! Have a nice day !')
+            game_on = False
+        else :
+            random_index = random.randint(0,2)
+            computer_choice = choices[random_index]
 
-print('computer choice : ',computer)
+            print(f"You selected : {get_choide(user_choice)}")
+            print(f"Computer choice : {get_choide(computer_choice)}")
 
-if playerx == 2 :
-    if computer == "scissors" :
-        print("Result : Draw")
-    if computer == "rock" :
-        print("Result : Lose")
-    if computer == "paper" : 
-        print("Result : win")
+            #winning Rules
+            if user_choice =="R" and computer_choice == "S" :
+                print('Congratuation , you Win . Rock beats Scissors !')
+            elif user_choice =="P" and computer_choice == "R" :
+                print('Congratuation , You Win . Paper covers Rock ! ')
+            elif user_choice =="S" and computer_choice == "P" :
+                print('Congratuation , you Win . Scissors cuts Paper !')
 
-if playerx == 0:
-    if computer == "scissors" :
-        print("Result : Win")
-    if computer == "rock" :
-        print("Result : Draw")
-    if computer == "paper" : 
-        print("Result : Lose")
+            #losing Rules
+            elif user_choice =="R" and computer_choice == "P" :
+                print('So sorry , Computer Wins . Paper covers Rock ! ')
+            elif user_choice =="S" and computer_choice == "R" :
+                print('So sorry , Computer Wins . Rock beats Scissors !')
+            elif user_choice =="P" and computer_choice == "S" :
+                print('So sorry , Computer Wins . Scissors cuts Paper !')
 
-if playerx == 1:
-    if computer == "scissors" :
-        print("Result : Lose")
-    if computer == "rock" :
-        print("Result : Win")
-    if computer == "paper" : 
-        print("Result : Draw")
+            #Draw Rule
+            elif user_choice==computer_choice:
+                print(f"Wow ! That's Draw . Both you and computer selected : {get_choide(user_choice)}")
+            else :
+                print('Invalid option : Please Only Choose [R] - [P] - [S] or [Q]')
+        counter += 1
+        print("-"*50)
+
+if __name__ == "__main__" :
+    main()
